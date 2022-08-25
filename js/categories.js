@@ -6,6 +6,15 @@ let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 
+let user = sessionStorage.getItem("correo");
+
+    if (user !== null){
+        document.getElementById("correo").innerHTML=user;    
+    } else {
+        alert("Debe iniciar sesión para poder continuar")
+        location.href="login.html";
+    }
+
 function sortCategories(criteria, array){
     let result = [];
     if (criteria === ORDER_ASC_BY_NAME)

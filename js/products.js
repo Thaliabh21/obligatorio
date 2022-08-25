@@ -1,5 +1,14 @@
 const LIST_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
 
+let user = sessionStorage.getItem("correo");
+
+    if (user !== null){
+        document.getElementById("correo").innerHTML=user;    
+    } else {
+        alert("Debe iniciar sesión para poder continuar")
+        location.href="login.html";
+    }
+
 catalogo = [];
 let catID = localStorage.getItem("catID");
 
