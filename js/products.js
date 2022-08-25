@@ -1,6 +1,7 @@
 const LIST_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
 
 catalogo = [];
+let catID = document.getElementById("automoviles");
 
 function verEnCatalogo(automoviles){
     let catalogoAutomoviles = "";
@@ -32,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(LIST_URL).then(function(resultObj){
         if (resultObj.status === "ok")
         {
+            LIST_URL+catID+".json"
             catalogo = resultObj.data;
             verEnCatalogo(catalogo.products);
         }
