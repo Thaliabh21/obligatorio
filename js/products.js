@@ -1,5 +1,13 @@
 const LIST_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+const ORDER_ASC_BY_COST = "↑$";
+const ORDER_DESC_BY_COST = "↓$";
+const ORDER_BY_PROD_COUNT = "Cant.";
+let currentSortCriteria = undefined;
+let minCost = undefined;
+let maxCost = undefined;
+let catalogoArticulos = [];
 
+let catID = localStorage.getItem("catID");
 let user = sessionStorage.getItem("correo");
 
     if (user !== null){
@@ -9,33 +17,78 @@ let user = sessionStorage.getItem("correo");
         location.href="login.html";
     }
 
-catalogo = [];
-let catID = localStorage.getItem("catID");
+function sortProducts(criteria, array){
+let result = [];
+if (criteria === ORDER_ASC_BY_COST)
+{
+    result = array.sort(function(a, b) {
+        if ( a.cost < b.cost ){ return -1; }
+        if ( a.cost > b.cost ){ return 1; }
+        return 0;
+    });
+}else if (criteria === ORDER_DESC_BY_COST){
+    result = array.sort(function(a, b) {
+        if ( a.cost > b.cost ){ return -1; }
+        if ( a.cost < b.cost ){ return 1; }
+        return 0;
+    });
+}else if (criteria === ORDER_BY_PROD_COUNT){
+    result = array.sort(function(a, b) {
+        let aCount = parseInt(a.soldCount);
+        let bCount = parseInt(b.soldCount);
 
-function verEnCatalogo(articulos){
-    let catalogoArticulos = "";
-    for (let articulo of articulos){ 
-        catalogoArticulos += `
-        <div class="list-group-item list-group-item-action">
-            <div class="row">
-                <div class="col-3">
-                    <img src="` + articulo.image + `" alt="product image" class="img-thumbnail"> </img>
-                </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <div class="mb-1">
-                                <h4> `+ articulo.name + " - " + articulo.currency + " " + articulo.cost +` </h4> 
-                                <p> `+ articulo.description +` </p> 
-                            </div>
-                            <small class="text-muted">` + articulo.soldCount + ` artículos vendidos </small> 
-                        </div>
+        if ( aCount > bCount ){ return -1; }
+        if ( aCount < bCount ){ return 1; }
+        return 0;
+    });
+}
 
+return result;
+}
+
+function verEnCatalogo(){
+    let listaAMostrar = "";
+    for (let articulo of catalogoArticulos){ 
+
+        
+        if (((minCost == undefined) || (minCost != undefined && parseInt(articulo.cost) >= minCost)) &&
+           ((maxCost == undefined) || (maxCost != undefined && parseInt(articulo.cost) <= maxCost))){
+
+    listaAMostrar += `
+            <div class="list-group-item list-group-item-action">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="` + articulo.image + `" alt="product image" class="img-thumbnail"> </img>
                     </div>
+                        <div class="col">
+                            <div class="d-flex w-100 justify-content-between">
+                                <div class="mb-1">
+                                    <h4> `+ articulo.name + " - " + articulo.currency + " " + articulo.cost +` </h4> 
+                                    <p> `+ articulo.description +` </p> 
+                                </div>
+                                <small class="text-muted">` + articulo.soldCount + ` artículos vendidos </small> 
+                            </div>
+
+                        </div>
+                </div>
             </div>
-        </div>
-        `
-        document.getElementById("articulos").innerHTML = catalogoArticulos; 
+            `
+       }
+
     }
+
+    document.getElementById("articulos").innerHTML = listaAMostrar; 
+}
+
+function sortAndShowProducts(sortCriteria, catalogo){
+    currentSortCriteria = sortCriteria;
+
+    if (catalogo != undefined){
+        catalogoArticulos = catalogo;
+    }
+
+    catalogoArticulos = sortProducts(currentSortCriteria, catalogoArticulos);
+    verEnCatalogo(catalogoArticulos.products);
 }
 
 document.addEventListener("DOMContentLoaded", function(e){
@@ -43,8 +96,53 @@ document.addEventListener("DOMContentLoaded", function(e){
         if (resultObj.status === "ok")
         {
             catalogo = resultObj.data;
+            catalogoArticulos = catalogo.products;
             verEnCatalogo(catalogo.products);
             document.getElementById("nombreCategoria").innerHTML=catalogo.catName;
         }
+    });
+
+    document.getElementById("sortAsc").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_ASC_BY_COST);
+    });
+
+    document.getElementById("sortDesc").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_DESC_BY_COST);
+    });
+
+    document.getElementById("sortByCount").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_BY_PROD_COUNT);
+    });
+
+    document.getElementById("clearRangeFilter").addEventListener("click", function(){
+        document.getElementById("rangeFilterCostMin").value = "";
+        document.getElementById("rangeFilterCostMax").value = "";
+
+        minCost = undefined;
+        maxCost = undefined;
+
+        verEnCatalogo(catalogoArticulos.products);
+    });
+
+    document.getElementById("rangeFilterCost").addEventListener("click", function(){
+        //Obtengo el mínimo y máximo de los intervalos para filtrar por precio los productos
+        minCost = document.getElementById("rangeFilterCostMin").value;
+        maxCost = document.getElementById("rangeFilterCostMax").value;
+
+        if ((minCost != undefined) && (minCost != "") && (parseInt(minCost)) >= 0){
+            minCost = parseInt(minCost);
+        }
+        else{
+            minCost = undefined;
+        }
+
+        if ((maxCost != undefined) && (maxCost != "") && (parseInt(maxCost)) >= 0){
+            maxCost = parseInt(maxCost);
+        }
+        else{
+            maxCost = undefined;
+        }
+
+        verEnCatalogo(catalogoArticulos.products);
     });
 });
