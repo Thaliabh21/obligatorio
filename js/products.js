@@ -1,13 +1,12 @@
 const LIST_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
 const ORDER_ASC_BY_COST = "↑$";
 const ORDER_DESC_BY_COST = "↓$";
-const ORDER_BY_PROD_COUNT = "Cant.";
+const ORDER_BY_SOLD_COUNT = "Cant.";
 let currentSortCriteria = undefined;
 let minCost = undefined;
 let maxCost = undefined;
 let catalogoArticulos = [];
 
-let catID = localStorage.getItem("catID");
 let user = sessionStorage.getItem("correo");
 
     if (user !== null){
@@ -17,22 +16,22 @@ let user = sessionStorage.getItem("correo");
         location.href="login.html";
     }
 
-function sortProducts(criteria, array){
+function sortProducts(criterio, array){
 let result = [];
-if (criteria === ORDER_ASC_BY_COST)
+if (criterio === ORDER_ASC_BY_COST)
 {
     result = array.sort(function(a, b) {
         if ( a.cost < b.cost ){ return -1; }
         if ( a.cost > b.cost ){ return 1; }
         return 0;
     });
-}else if (criteria === ORDER_DESC_BY_COST){
+}else if (criterio === ORDER_DESC_BY_COST){
     result = array.sort(function(a, b) {
         if ( a.cost > b.cost ){ return -1; }
         if ( a.cost < b.cost ){ return 1; }
         return 0;
     });
-}else if (criteria === ORDER_BY_PROD_COUNT){
+}else if (criterio === ORDER_BY_SOLD_COUNT){
     result = array.sort(function(a, b) {
         let aCount = parseInt(a.soldCount);
         let bCount = parseInt(b.soldCount);
@@ -49,7 +48,6 @@ return result;
 function verEnCatalogo(){
     let listaAMostrar = "";
     for (let articulo of catalogoArticulos){ 
-
         
         if (((minCost == undefined) || (minCost != undefined && parseInt(articulo.cost) >= minCost)) &&
            ((maxCost == undefined) || (maxCost != undefined && parseInt(articulo.cost) <= maxCost))){
@@ -88,16 +86,17 @@ function sortAndShowProducts(sortCriteria, catalogo){
     }
 
     catalogoArticulos = sortProducts(currentSortCriteria, catalogoArticulos);
-    verEnCatalogo(catalogoArticulos.products);
+    verEnCatalogo(catalogoArticulos);
 }
+
+let catID = localStorage.getItem("catID");
 
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCTS_URL+catID+".json").then(function(resultObj){
         if (resultObj.status === "ok")
         {
-            catalogo = resultObj.data;
-            catalogoArticulos = catalogo.products;
-            verEnCatalogo(catalogo.products);
+            catalogoArticulos = resultObj.data.products;
+            verEnCatalogo(catalogoArticulos);
             document.getElementById("nombreCategoria").innerHTML=catalogo.catName;
         }
     });
@@ -111,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 
     document.getElementById("sortByCount").addEventListener("click", function(){
-        sortAndShowProducts(ORDER_BY_PROD_COUNT);
+        sortAndShowProducts(ORDER_BY_SOLD_COUNT);
     });
 
     document.getElementById("clearRangeFilter").addEventListener("click", function(){
@@ -121,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         minCost = undefined;
         maxCost = undefined;
 
-        verEnCatalogo(catalogoArticulos.products);
+        verEnCatalogo(catalogoArticulos);
     });
 
     document.getElementById("rangeFilterCost").addEventListener("click", function(){
@@ -143,6 +142,6 @@ document.addEventListener("DOMContentLoaded", function(e){
             maxCost = undefined;
         }
 
-        verEnCatalogo(catalogoArticulos.products);
+        verEnCatalogo(catalogoArticulos);
     });
 });
