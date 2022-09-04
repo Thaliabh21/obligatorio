@@ -94,10 +94,12 @@ let catID = localStorage.getItem("catID");
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCTS_URL+catID+".json").then(function(resultObj){
         if (resultObj.status === "ok")
-        {
+        {   
+            catalogoArticulos = resultObj.data
+            document.getElementById("nombreCategoria").innerHTML=catalogoArticulos.catName;
+            
             catalogoArticulos = resultObj.data.products;
             verEnCatalogo(catalogoArticulos);
-            document.getElementById("nombreCategoria").innerHTML=catalogo.catName;
         }
     });
 
