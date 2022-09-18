@@ -53,7 +53,7 @@ function verEnCatalogo(){
            ((maxCost == undefined) || (maxCost != undefined && parseInt(articulo.cost) <= maxCost))){
 
     listaAMostrar += `
-            <div class="list-group-item list-group-item-action">
+            <div onclick="setProductID(${articulo.id})" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
                         <img src="` + articulo.image + `" alt="product image" class="img-thumbnail"> </img>
@@ -90,6 +90,11 @@ function sortAndShowProducts(sortCriteria, catalogo){
 }
 
 let catID = localStorage.getItem("catID");
+
+function setProductID(id) {
+    localStorage.setItem("productID", id);
+    window.location = "product-info.html"
+}
 
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCTS_URL+catID+".json").then(function(resultObj){

@@ -10,6 +10,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -31,6 +32,7 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
+              <a class="nav-link" href="my-profile.html"><span id="correo"></span></a> 
           </li>
         </ul>
       </div>
@@ -38,10 +40,37 @@
   </nav>
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+        <div id="info">
+        </div> <br>
+        <div>
+          <h4> <strong> Comentarios: </strong> </h4>
+          <ul class="list-group" id="coments">
+          </ul>
+        </div>
+    </div> <br>
+
+    <div class="container">
+      <h4><strong>Agregar Comentarios</strong></h4><br>
+      <div id="comentario">
+        <div>
+          <textarea name="newComent" id="newComent" placeholder="Introduzca aquí su opinión" cols="50px" rows="5px"></textarea>
+        </div>
+        <br>
+        <div>
+            <p>Tu puntuación:</p>
+          <select name="star" id="star">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <br>
+        <button class="btn btn-info" type="submit"><strong>Enviar</strong></button>
       </div>
     </div>
+
   </main>
   <footer class="text-muted">
     <div class="container">
