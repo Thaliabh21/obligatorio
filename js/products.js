@@ -91,7 +91,7 @@ function sortAndShowProducts(sortCriteria, catalogo){
 
 function setProductID(id) {
     localStorage.setItem("productID", id);
-    window.location = "product-info.html"
+    location.href = "product-info.html"
 }
 
 let catID = localStorage.getItem("catID");
