@@ -89,12 +89,12 @@ function sortAndShowProducts(sortCriteria, catalogo){
     verEnCatalogo(catalogoArticulos);
 }
 
-let catID = localStorage.getItem("catID");
-
 function setProductID(id) {
     localStorage.setItem("productID", id);
     window.location = "product-info.html"
 }
+
+let catID = localStorage.getItem("catID");
 
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCTS_URL+catID+".json").then(function(resultObj){
