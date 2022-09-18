@@ -28,7 +28,7 @@ function verProducto(array){
     inicio += `<div> 
         <h2> <br> ` + array.name + ` </h2> <br> <hr>        
         <h4> <strong> Precio: </strong> </h4>
-        <p> ` + array.currency + array.cost + ` </p>
+        <p> ` + array.currency + " " + array.cost + ` </p>
         <h4> <strong> Descripción: </strong> </h4>
         <p> ` + array.description + ` </p>
         <h4> <strong> Categoría: </strong> </h4>
