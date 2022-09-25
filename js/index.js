@@ -20,4 +20,10 @@ document.addEventListener("DOMContentLoaded", function(){
         alert("Debe iniciar sesión para poder continuar")
         location.href="login.html";
     }
+
+    document.getElementById("cerrar").addEventListener("click", function() {
+        sessionStorage.removeItem("correo"); // Elimino el usuario guardado anteriormente en el almacenamiento de sesión.
+        window.location = "login.html"
+    });
+
 });
