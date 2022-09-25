@@ -70,6 +70,10 @@ function mostrarPizzita(slices){ // Resulta ser que ninguna pizza me funcionó, 
     return porcion;
 }
 
+function mostrarProductosRelacionados(){
+    
+}
+
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCT_INFO_URL+productID+".json").then(function(resultObj){
         if (resultObj.status === "ok")
@@ -85,5 +89,10 @@ document.addEventListener("DOMContentLoaded", function(e){
             arrayComents = resultObj.data
             verComentarios(arrayComents);
         }
+    });
+
+    document.getElementById("cerrar").addEventListener("click", function() {
+        sessionStorage.removeItem("correo"); // Elimino el usuario guardado anteriormente en el almacenamiento de sesión.
+        window.location = "login.html"
     });
 });
