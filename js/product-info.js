@@ -70,8 +70,21 @@ function mostrarPizzita(slices){ // Resulta ser que ninguna pizza me funcionó, 
     return porcion;
 }
 
-function mostrarProductosRelacionados(){
-    
+function setProductID(id) {
+    localStorage.setItem("productID", id);
+    location.href = "product-info.html"
+}
+
+function mostrarProductosRelacionados(producto){
+    let relacionado = "";
+    for (let objeto of producto.relatedProducts){
+        relacionado += `<div onclick="setProductID(`+ objeto.id +`)"> 
+        <img src="` + objeto.image + `"alt="product image" class="img-thumbnail" width="250px"> </img> 
+        <br><br>
+        <p><strong>`+ objeto.name +`</strong></p>
+        </div>`
+    }
+    document.getElementById("relatedProducts").innerHTML= relacionado;
 }
 
 document.addEventListener("DOMContentLoaded", function(e){
@@ -80,6 +93,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         {   
             arrayProducts = resultObj.data
             verProducto(arrayProducts);
+            mostrarProductosRelacionados(arrayProducts);
         }
     });
 
