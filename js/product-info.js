@@ -72,7 +72,7 @@ function mostrarPizzita(slices){ // Resulta ser que ninguna pizza me funcionó, 
 
 function setProductID(id) {
     localStorage.setItem("productID", id);
-    location.href = "product-info.html"
+    location.reload();
 }
 
 function mostrarProductosRelacionados(producto){
