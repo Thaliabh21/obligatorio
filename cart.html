@@ -46,11 +46,42 @@
     </div>
   </nav>
   <main>
+    
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+      <h1 style="text-align: center;">Carrito de compras</h1><br>
+      <h3>Artículos a comprar</h3>
+      <table>
+        <tr>
+        <th style="padding: 25px;"></th>
+        <th style="padding: 25px;">Nombre</th>
+        <th style="padding: 25px;">Costo</th>
+        <th style="padding: 25px;">Cantidad</th>
+        <th style="padding: 25px;">Subtotal</th>
+      </tr>
+        <tbody id="cart">
+
+        </tbody>
+      </table>
     </div>
+    
+    <hr>
+    
+    <div class="container">
+        <h3>Tipo de envío</h3>
+        <input name="envio" type="radio" id="premium">  Premium: 2 a 5 días (15%) </button> <br>
+        <input name="envio" type="radio" id="express" checked> Express: 5 a 8 días (7%) </button> <br>
+        <input name="envio" type="radio" id="standard"> Standard: 12 a 15 días (5%) </button> <br><br>
+    </div>
+
+      <div class="container form-group">
+        <h3>Dirección de envío</h3>
+        <label for="calle" class="form-label">Calle</label>
+        <input name="calle" class="form-control" type="text" id="calle" style="width: 350px;"><br>
+        <label for="numero" class="form-label">Número</label>
+        <input name="numero" class="form-control" type="number" id="numero" style="width: 350px;"><br>
+        <label for="esquina" class="form-label">Esquina</label>
+        <input name="esquina" class="form-control" type="text" id="esquina" style="width: 350px;"><br>
+      </div>
   </main>
   <footer class="text-muted">
     <div class="container">
