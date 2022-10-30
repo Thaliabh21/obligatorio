@@ -45,19 +45,22 @@
       </div>
     </div>
   </nav>
+  
+<div class="container">
   <main>
-    
+    <form action="#" method="get" class="row mt-4 needs-validation" novalidate>
     <div class="container">
+      <br>
       <h1 style="text-align: center;">Carrito de compras</h1><br>
       <h3>Artículos a comprar</h3>
-      <table>
-        <tr>
+      <table style="width: 900px; border-collapse: 3px;">
+        <tr style="border-bottom:1px solid">
         <th style="padding: 25px;"></th>
         <th style="padding: 25px;">Nombre</th>
         <th style="padding: 25px;">Costo</th>
         <th style="padding: 25px;">Cantidad</th>
         <th style="padding: 25px;">Subtotal</th>
-      </tr>
+      </tr> 
         <tbody id="cart">
 
         </tbody>
@@ -68,21 +71,158 @@
     
     <div class="container">
         <h3>Tipo de envío</h3>
-        <input name="envio" type="radio" id="premium">  Premium: 2 a 5 días (15%) </button> <br>
-        <input name="envio" type="radio" id="express" checked> Express: 5 a 8 días (7%) </button> <br>
-        <input name="envio" type="radio" id="standard"> Standard: 12 a 15 días (5%) </button> <br><br>
+        <input name="envio" type="radio" id="premium" onchange="TiposDeEnvios()" required> 
+        <label for="premium">Premium: 2 a 5 días (15%)</label>  <br>
+        <input name="envio" type="radio" id="express" onchange="TiposDeEnvios()" required> 
+        <label for="express">Express: 5 a 8 días (7%)</label> <br>
+        <input name="envio" type="radio" id="standard" onchange="TiposDeEnvios()" required> 
+        <label for="standard">Standard: 12 a 15 días (5%)</label> 
+        <input type="text" id="metodoEnvioSeleccionado" style='visibility: hidden;' required> <!-- Modo alterno para poner requerido el tipo de envío y que aparezca el cartel si no hay un tipo seleccionado-->
+          <div class="invalid-feedback">
+            Debe seleccionar un método de pago
+          </div>
+        <br><br>
+
     </div>
 
       <div class="container form-group">
         <h3>Dirección de envío</h3>
-        <label for="calle" class="form-label">Calle</label>
-        <input name="calle" class="form-control" type="text" id="calle" style="width: 350px;"><br>
+      <!--<label for="calle" class="form-label">Calle</label>
+        <input class="form-control" type="text" id="calle" style="width: 350px;" required>
+        <span style="visibility: hidden; color: red;" id="pCalle">Ingresa una calle</span><br>
         <label for="numero" class="form-label">Número</label>
-        <input name="numero" class="form-control" type="number" id="numero" style="width: 350px;"><br>
+        <input name="numero" class="form-control" type="number" id="numero" style="width: 350px;" min="1" required>
+        <span style="visibility: hidden; color: red;" id="pNumero">Ingresa un número</span><br>
         <label for="esquina" class="form-label">Esquina</label>
-        <input name="esquina" class="form-control" type="text" id="esquina" style="width: 350px;"><br>
+        <input name="esquina" class="form-control" type="text" id="esquina" style="width: 350px;" required>
+        <span style="visibility: hidden; color: red;" id="pEsquina">Ingresa una esquina</span><br> 
+          Método rebuscado, antes de hacer validaciones con Bootstrap-->
+        <label for="calle" class="form-label">Calle</label>
+        <input class="form-control" type="text" id="calle" style="width: 350px;" required>
+        <div class="invalid-feedback">
+          Ingresa una calle
+        </div> <br>
+
+        <label for="numero" class="form-label">Número</label>
+        <input class="form-control" type="number" id="numero" style="width: 350px;" required>
+        <div class="invalid-feedback">
+          Ingresa un número
+        </div> <br>
+
+        <label for="esquina" class="form-label">Esquina</label>
+        <input name="esquina" class="form-control" type="text" id="esquina" style="width: 350px;" required>
+        <div class="invalid-feedback">
+          Ingresa una esquina
+        </div> <br>
       </div>
+
+    <hr>
+
+      <div class="container">
+        <h3>Costos</h3> <br>
+        <!-- <table style="width: 900px; border: 3px;">
+          <tr style="border-bottom:1px solid"><td><b>Subtotal</b> <p>Costo unitario del producto por cantidad</p><span id="subtotal"></span></td></tr>
+          <tr style="border-bottom:1px solid"><td><b>Costo de envío</b> <p>Según el tipo de envío</p> <span id="costoEnvio"></span></td></tr>
+          <tr style="border-bottom:1px solid"><td><b>Total</b> <span id="total"></span></td></tr>
+          <tbody id="">
+  
+          </tbody>
+        </table> --Forma en que lo había hecho en principio, pensando que era una tabla--> 
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Subtotal</h6>
+              <small class="text-muted">Costo unitario del producto por cantidad</small>
+            </div>
+            <span class="text-muted" id="subtotal">-</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Costo de envío</h6>
+              <small class="text-muted">Según el tipo de envío</small>
+            </div>
+            <span class="text-muted" id="costoEnvio">-</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total</span>
+            <strong id="totalCost">-</strong>
+          </li>
+        </ul>
+        <br>
+      </div>
+
+      <hr>
+
+      <div class="container">
+        <h3>Forma de pago</h3>
+        <p><span id="metPago">No ha seleccionado un método de pago </span>
+          <button type="button" class="m-1 btn btn-link" data-bs-toggle="modal" data-bs-target="#contidionsModal">
+            Seleccionar
+          </button></p>
+          <input type="text" id="metodoPagoSeleccionado" style= 'visibility: hidden;'required> <!-- Modo alterno para poner requerida la forma de pago y que aparezca el cartel si no hay un método seleccionado-->
+          <div class="invalid-feedback" style="margin-top: -50px;">
+            Debe seleccionar un método de pago
+          </div>
+          <!-- <p style="visibility: hidden; color: red;" id="parrafoOculto">Debe seleccionar un método de pago</p>  -->
+        <div class="row">
+            <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title"><b>Forma de pago</b></h5>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container">
+                      <div>
+                        <input type="radio" name="pago" id="tarjeta" onclick="cambiarMetodoDePago()" required><label for="tarjeta">Tarjeta de credito</label>
+                      <hr>
+                        <div class="row">
+                          <label for="numero" class="form-label">Número de tarjeta</label>
+                          <input type="number" name="numero" class="form-control" id="numeroTarjeta" onkeypress="validarCampos()" required>
+
+                          <label for="codigo" class="form-label">Código de seguridad</label>
+                          <input type="number" name="codigo" class="form-control" id="codigo" onkeypress="validarCampos()" required>
+
+                          <label for="vencimiento" class="form-label">Vencimiento (MM/AA)</label>
+                          <input type="month" name="vencimiento" class="form-control" id="vencimiento" onkeypress="validarCampos()" required>
+                        </div>
+                      </div>
+                      <hr>
+                      
+                      <div>
+                        <input type="radio" name="pago" id="transferencia" onclick="cambiarMetodoDePago()" required><label for="transferencia">Transferencia bancaria</label>
+                      <hr>
+                        <div class="row">
+                          <label for="numero" class="form-label">Número de cuenta</label>
+                          <input type="number" name="numero" class="form-control" id="numeroCuenta" onkeypress="validarCampos()" required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="cerrarModal" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+        
+      </div>
+
+      <br>
+
+      <div class="container">
+        <button type="submit" class="btn btn-primary" style="width: 900px;" >Finalizar compra</button>
+      </div>
+
+      <div class="alert alert-success alert-dismissible fade" role="alert" id="alert-success">
+        <p style="text-align: center;">¡Has comprado con éxito!</p>
+      </div>
+    </form>
   </main>
+</div>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
