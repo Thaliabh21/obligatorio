@@ -22,7 +22,9 @@ function cambiarCantidad(){
         mostrarCarrito(articulos);
         TiposDeEnvios();
 }
+
 let subtotal=0;
+
 function mostrarCarrito(articulos){
     let cart="";
     for (articulo of articulos){
@@ -39,7 +41,7 @@ function mostrarCarrito(articulos){
     document.getElementById("cart").innerHTML= cart;
 }
 
-var porcentajeEnvio = 0;
+let porcentajeEnvio = 0;
 
 function calcularPorcentaje(porcentaje){
    porcentajeEnvio= ((subtotal*porcentaje)/100);
@@ -69,7 +71,6 @@ function TiposDeEnvios(){
     if (botonPremium || botonExpress || botonStandard){
         document.getElementById("metodoEnvioSeleccionado").value = "ok";
     }
-
 }
 
 //FUNCION QUE TIENE TODAS LAS ETIQUETAS Y LE PASO POR PARAMETRO CUAL HABILITO Y CUAL DESHABILITO
@@ -103,6 +104,7 @@ function validarCampos(){
         document.getElementById("metodoPagoSeleccionado").value = "";
     }
 }
+
 function cambiarMetodoDePago(){
 
     if (document.getElementById("tarjeta").checked){
@@ -178,28 +180,19 @@ document.addEventListener("DOMContentLoaded", function(e){
         }
     })
 
-
         var forms = document.querySelectorAll('.needs-validation')
       
-        
         Array.prototype.slice.call(forms)
           .forEach(function (form) {
             form.addEventListener('submit', function (event) {
-              if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-            }else{
-                showAlertSuccess()
-              }
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }else{
+                    showAlertSuccess()
+                }
       
               form.classList.add('was-validated')
             }, false)
-          })
-      
+          })  
 });
-
-
-
-//document.getElementById("parrafoOculto").style.visibility = 'visible';
-
-//document.getElementById("parrafoOculto").style.visibility = 'hidden'; En caso de no funcionar desde HTML a JS, lo aplico así en JS, para luego hacerlo visible.
