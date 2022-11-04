@@ -188,3 +188,14 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+.swal2-styled.swal2-confirm.swalBtnColor {
+  background-color: #db1515;
+  color: #fff;
+}
+
+/* .swal2-styled.swal2-confirm {
+  background: initial;
+  background-color: #db1515;
+  color: #fff;
+} -- Si lo dejo de este modo, en vez de con su clase customClass, al recargar la página el botón vuelve al color azul pálido inicial -- */

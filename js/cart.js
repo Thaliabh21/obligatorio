@@ -7,12 +7,6 @@ let user = sessionStorage.getItem("correo");
         location.href="login.html";
     }
 
-document.addEventListener("DOMContentLoaded", function(e){
-    document.getElementById("cerrar").addEventListener("click", function() {
-    sessionStorage.removeItem("correo"); // Elimino el usuario guardado anteriormente en el almacenamiento de sesión.
-    window.location = "login.html"
-    });
-});
 
 let articulos=[];
 
@@ -179,6 +173,12 @@ document.addEventListener("DOMContentLoaded", function(e){
             mostrarCarrito(articulos);
         }
     })
+
+        document.getElementById("cerrar").addEventListener("click", function() {
+        sessionStorage.removeItem("email"); // Elimino el usuario guardado anteriormente en el almacenamiento de sesión.
+        window.location = "login.html"
+        });
+    
 
         var forms = document.querySelectorAll('.needs-validation')
       

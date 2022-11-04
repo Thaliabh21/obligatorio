@@ -20,15 +20,17 @@
 
 <body>
   <main class="mt-5">
+    <!-- <form> -->
     <div class="container">
       <div class="text-center">
         <h3> <b>Iniciar sesión</b></h3> <br> <br>
-        <label for="correo"> <strong>Correo Electrónico</strong> <input type="email" id="correo" name="correo" class="form-control" placeholder="Ingresar dirección email"></label> <br> <br>
+        <label for="email"> <strong>Correo Electrónico</strong> <input type="email" id="correo" name="email" class="form-control" placeholder="Ingresar dirección email"></label> <br> <br>
         <label for="contraseña"> <strong>Contraseña</strong>  <input type="password" id="contraseña" name="contraseña" class="form-control" placeholder="Ingresar contraseña"></label> <br> <br>
 
         <button id="ingresar" class="btn btn-success">Ingresar</button>
       </div>
     </div>
+    <!-- </form> -->
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -41,6 +43,9 @@
     </div>
   </footer>
   <script src="js/login.js"></script>
+  <!-- <script src = "https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -- Para la swal normal (sin .fire) -->
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> <!-- Para swal con .fire -->
+  <!-- <script src="dist/sweetalert.min.js"></script> Este enlace no está en funcionamiento -->
 </body>
 
 </html>
