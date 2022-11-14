@@ -103,6 +103,21 @@ document.addEventListener("DOMContentLoaded", function(e){
             arrayComents = resultObj.data
             verComentarios(arrayComents);
         }
+
+        document.getElementById("enviar").addEventListener("click", function(){
+            let fecha = new Date();
+            let tiempo = fecha.toLocaleTimeString();
+            let date = fecha.toLocaleDateString();
+    
+        arrayComents.push({
+            "product": parseInt(localStorage.getItem("productID")),
+            "score": parseInt(document.getElementById("star").value),
+            "description": document.getElementById("newComent").value,
+            "user": localStorage.getItem("user"),
+            "dateTime": tiempo + "-" + date
+        })
+        verComentarios();
+        })
     });
 
     document.getElementById("cerrar").addEventListener("click", function() {

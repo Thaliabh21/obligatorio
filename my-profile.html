@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width"/>
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -35,6 +36,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
+          <form class="d-flex">
+            <input class="form-control me-2  d-block d-lg-none" type="search" id="buscador1" placeholder="Buscar..">
+          </form>
           <li class="nav-item">
             <a class="nav-link" href="index.html">Inicio</a>
           </li>
@@ -44,13 +48,16 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
+          <form class="d-flex">
+            <input class="form-control me-2  d-none d-lg-block" type="search" id="buscador2" placeholder="Buscar..">  <!--me-2  d-none d-lg-block" -Esto pertenece a la clase -->
+         </form>
           <li class="nav-item">
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 <span id="correo"></span>
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+                <li><a class="dropdown-item" href="my-profile.html"><b>Mi perfil</b></a></li>
                 <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
                 <li><a class="dropdown-item" id="cerrar">Cerrar sesión</a></li>
               </ul>
@@ -62,9 +69,54 @@
   </nav>
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+       <form action="#" method="get" class="row g-3 needs-validation" novalidate> <!-- g-3 le da la separación a los input -->
+          <div class="col-lg-12 col-md-6 col-xs-3">
+            <br>
+            <h1>Perfil</h1> <span id="foto"></span>
+            <br><hr>
+          </div>
+          <!-- <div class="container form-group"> -- Esto no permite colocarlo en dos columnas -->
+                <div class="col-md-6">
+                <label for="nombre" class="form-label">Primer nombre</label> <br> 
+                <input type="text" id="nombre" class="form-control" required>
+                </div>
+                
+                <div class="col-md-6">
+                <label for="segundoNombre" class="form-label">Segundo nombre</label> <br> 
+                <input type="text" id="nombre2" class="form-control">
+                </div>
+                
+                <div class="col-md-6">
+                <label for="apellido" class="form-label">Apellido</label> <br> 
+                <input type="text" id="apellido1" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                <label for="segundoApellido" class="form-label">Segundo apellido</label> <br> 
+                <input type="text" id="apellido2" class="form-control">
+                </div>
+                
+                <div class="col-md-6">
+                <label for="email" class="form-label">E-mail</label> <br> 
+                <input type="email" name="email" id="email" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                <label for="foto">Imagen de perfil</label><br>
+                <input type="file" id="archivo">
+                </div>
+                
+                <div class="col-md-6">
+                <label for="telefono" class="form-label">Teléfono de contacto</label> <br> 
+                <input type="number" id="telefono" class="form-control">
+                </div>
+
+                
+              <hr>
+          <!-- </div> -->
+          
+        <button type="submit" class="btn btn-primary">Gurardar cambios</button>
+      </form>
     </div>
   </main>
   <footer class="text-muted">
@@ -80,6 +132,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/my-profile.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> <!-- swal.fire  -->
 </body>
 
 </html>

@@ -185,10 +185,10 @@ document.addEventListener("DOMContentLoaded", function(e){
         Array.prototype.slice.call(forms)
           .forEach(function (form) {
             form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
+                if (!form.checkValidity()) { // -- Si no está el formulario validado se realizan los eventos --
                     event.preventDefault()
                     event.stopPropagation()
-                }else{
+                }else{                       // -- De lo contrario, se ejecuta la alerta de compra exitosa --
                     showAlertSuccess()
                 }
       

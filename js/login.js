@@ -6,12 +6,14 @@ function ingresar() {
     if (user !== "" && contraseña !== "" && contraseña.length >= 6 && emailRegex.test(user)) {
         //swal("¡Datos ingresados correctamente, puede proceder a navegar por el sitio!"); -- modo básico --
         sessionStorage.setItem("correo", user);
-        location.href = "index.html";
-        /*swal({
-            title: "Good job",
-            text: "¡Datos ingresados correctamente, puede proceder a navegar por el sitio!",
+        swal.fire({
+            customClass: {
+                confirmButton: 'swalBtnColor2'},
+            title: "Bienvenido",
+            text: "Ha ingresado correctamente",
             icon: "success",
-          }); -- Se recarga muy pronto, por ende no la puedo ver -- */ 
+          });
+          location.href = "index.html";
     } else {
         // swal("Debe ingresar un correo electrónico válido y contraseña con al menos 6 carácteres para poder continuar");
         swal.fire({
