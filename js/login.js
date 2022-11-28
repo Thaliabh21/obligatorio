@@ -12,6 +12,7 @@ function ingresar() {
             title: "Bienvenido",
             text: "Ha ingresado correctamente",
             icon: "success",
+            timer: "3000", // -- No cambia nada el tiempo que le doy --
           });
           location.href = "index.html";
     } else {

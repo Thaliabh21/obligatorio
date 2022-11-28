@@ -103,22 +103,29 @@ document.addEventListener("DOMContentLoaded", function(e){
             arrayComents = resultObj.data
             verComentarios(arrayComents);
         }
-
-        document.getElementById("enviar").addEventListener("click", function(){
-            let fecha = new Date();
-            let tiempo = fecha.toLocaleTimeString();
-            let date = fecha.toLocaleDateString();
-    
-        arrayComents.push({
-            "product": parseInt(localStorage.getItem("productID")),
-            "score": parseInt(document.getElementById("star").value),
-            "description": document.getElementById("newComent").value,
-            "user": localStorage.getItem("user"),
-            "dateTime": tiempo + "-" + date
-        })
-        verComentarios();
-        })
     });
+
+    // DESAFÍO AGREGAR COMENTARIOS
+    document.getElementById("enviar").addEventListener("click", function(){
+        let fecha = new Date();
+        let tiempo = fecha.toLocaleTimeString();
+        let date = fecha.toLocaleDateString();
+
+    sessionStorage.setItem("score", document.getElementById("star").value);
+    sessionStorage.setItem("description", document.getElementById("newComent").value);
+        
+    arrayComents.push({
+        "product": parseInt(localStorage.getItem("productID")),
+        "score": parseInt(document.getElementById("star").value),
+        "description": document.getElementById("newComent").value,
+        "user": sessionStorage.getItem("correo"),
+        "dateTime": tiempo + "-" + date
+    })
+     	verComentarios(arrayComents);
+        document.getElementById("newComent").value = "";
+        document.getElementById("star").value = 1;
+    })
+    //
 
     document.getElementById("cerrar").addEventListener("click", function() {
         sessionStorage.removeItem("correo"); // Elimino el usuario guardado anteriormente en el almacenamiento de sesión.

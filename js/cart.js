@@ -9,12 +9,17 @@ let user = sessionStorage.getItem("correo");
 
 
 let articulos=[];
+ 
 
 function cambiarCantidad(){
-    let cant= document.getElementById("cantidad");
+    let cant = document.getElementById("cantidad");
         articulo.count = cant.value; // Le asigno a la propiedad articulo.count, el valor introducido en el input.
         mostrarCarrito(articulos);
         TiposDeEnvios();
+
+        // if (cant.value == ""){
+        //     cant.style.borderColor = 'red';
+        // } -- QUIERO HACER QUE SI EL INPUT ESTÁ VACÍO QUEDE EN ROJO, EN TEORÍA NO DEBE DEJAR COMPRAR SI ESTÁ VACÍO --
 }
 
 let subtotal=0;
@@ -24,16 +29,19 @@ function mostrarCarrito(articulos){
     for (articulo of articulos){
        subtotal = articulo.count * articulo.unitCost;
             cart+=`<tr>
-            <td><img src="` + articulo.image + `"alt="product image" class="img-thumbnail" width="100px"></img></td>
+            <td><img src="` + articulo.image + `"alt="product image" class="img-thumbnail" width="125px"></img></td>
             <td style="padding: 25px;">` + articulo.name + `</td>
             <td style="padding: 25px;">` + articulo.currency + " " + articulo.unitCost + `</td>
-            <td style="padding: 25px;">` + `<input onchange="cambiarCantidad()" id="cantidad" type="number" min="1" value=` + articulo.count + ` style="width:70px;" ></input>` + `</td>
+            <td style="padding: 25px;">` + `<input onchange="cambiarCantidad()" oninput="validity.valid||(value='1');" id="cantidad" type="number" min="1" value=` + articulo.count + ` style="width:70px;"></input>` + `</td>
             <td style="padding: 25px;"><strong>` + articulo.currency + " " + subtotal + `</strong></td>
             </tr>`
     }
     document.getElementById("subtotal").innerHTML= "USD " + subtotal;
     document.getElementById("cart").innerHTML= cart;
 }
+
+// -- oninput="validity.valid||(value='1');" CON ESTO NO PERMITO QUE SE INGRESEN NÚMEROS NEGATIVOS EN EL INPUT AL ESCRIBIR,
+//    SI SE PRESIONA EL "-", DIRECTAMENTE PONE EL 1, LO MISMO AL PRESIONAR 0, AMBOS CASOS CON EL INPUT VACÍO --
 
 let porcentajeEnvio = 0;
 
@@ -85,10 +93,10 @@ let campoVencimiento;
 let campoNumCuenta;
 
 function validarCampos(){
-    campoNumTarjeta = document.getElementById("numeroTarjeta").value> 0;
-    campoCodigo = document.getElementById("codigo").value> 0;
+    campoNumTarjeta = document.getElementById("numeroTarjeta").value > 0;
+    campoCodigo = document.getElementById("codigo").value > 0;
     campoVencimiento = document.getElementById("vencimiento").value !== "";
-    campoNumCuenta = document.getElementById("numeroCuenta").value> 0;
+    campoNumCuenta = document.getElementById("numeroCuenta").value > 0;
 
     if (campoNumTarjeta && campoCodigo && campoVencimiento){
         document.getElementById("metodoPagoSeleccionado").value = "ok";
@@ -178,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         sessionStorage.removeItem("email"); // Elimino el usuario guardado anteriormente en el almacenamiento de sesión.
         window.location = "login.html"
         });
-    
+        
 
         var forms = document.querySelectorAll('.needs-validation')
       

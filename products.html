@@ -21,9 +21,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
-          <form class="d-flex">
-            <input class="form-control me-2  d-block d-lg-none" type="search" id="buscador1" placeholder="Buscar..">
-          </form>
+          <!-- <form class="d-flex">
+            <input class="form-control me-2  d-block d-lg-none" type="search" id="buscando" placeholder="Buscar..">
+          </form> -->
           <li class="nav-item">
             <a class="nav-link" href="index.html">Inicio</a>
           </li>
@@ -33,9 +33,16 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <form class="d-flex">
-            <input class="form-control me-2  d-none d-lg-block" type="search" id="buscador2" placeholder="Buscar..">  <!--me-2  d-none d-lg-block" -Esto pertenece a la clase -->
-         </form>
+          
+          <li class="nav-item">
+            <input class="form-control" type="search" id="buscando" placeholder="Buscar..">
+            <!-- <button class="btn btn-primary" type="button" id="buscc"> Buscar </button> -->
+          </li>
+          
+          
+          <!-- <form class="d-flex">
+            <input class="form-control me-2  d-none d-lg-block" type="search" id="buscador2" placeholder="Buscar..">  
+          </form> -->
           <li class="nav-item">
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -56,7 +63,8 @@
     <div class="container"> <br>
       <div>
         <h4 style="text-align:center"><strong><span id="nombreCategoria"></span></strong></h4> <br>
-          <div class="container">             
+          <div class="container">
+            <div class="row">
               <div class="col text-end">
                 <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
                   <input type="radio" class="btn-check" name="options" id="sortAsc">
@@ -67,6 +75,7 @@
                   <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"></i>Rel.</label>
                 </div>
               </div>
+            </div>
            
           <div class="row">
             <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">

@@ -45,7 +45,39 @@ if (criterio === ORDER_ASC_BY_COST)
 return result;
 }
 
-function verEnCatalogo(){
+// DESAFÍO BUSCADOR
+let FiltroArticulos = [];
+
+function buscar(){
+    let inputSearch = document.getElementById("buscando").value;
+    
+    if (inputSearch == "") {
+        verEnCatalogo(catalogoArticulos);  
+    } else { 
+        
+      FiltroArticulos = catalogoArticulos.filter((articulo) => {
+
+        let art = "";
+        function arti(){
+            for (let articuloss of articulo.name){
+                art += `${articuloss.name} `
+            }
+            return art;
+        }
+        arti();
+
+        return (
+        articulo.name.toLowerCase().indexOf(inputSearch.toLowerCase()) > -1 ||
+        articulo.description.toLowerCase().indexOf(inputSearch.toLowerCase()) > -1
+        );
+      });
+    //   console.log(FiltroArticulos);
+      verEnCatalogo(FiltroArticulos);
+    }
+}
+
+
+function verEnCatalogo(catalogoArticulos){ // -- Le paso el parámetro para que me filtre en pantalla y no solo en consola --
     let listaAMostrar = "";
     for (let articulo of catalogoArticulos){ 
         
@@ -107,6 +139,18 @@ document.addEventListener("DOMContentLoaded", function(e){
             verEnCatalogo(catalogoArticulos);
         }
     });
+
+    document.getElementById("buscando").addEventListener("input", function(){
+        buscar();
+    })
+    
+    // document.getElementById("buscador1").addEventListener("input", function () {
+    //     buscar();
+    // });
+
+    // document.getElementById("buscador2").addEventListener("input", function () {
+    //     buscar();
+    // });
 
     document.getElementById("sortAsc").addEventListener("click", function(){
         sortAndShowProducts(ORDER_ASC_BY_COST);

@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="viewport" content="width=device-width"/> <!-- Para hacer la página responsive por defecto -->
+  <!-- <meta name="viewport" content="width=device-width"/>  Para hacer la página responsive por defecto -->
   <title>eMercado - Todo lo que busques está aquí</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -13,7 +13,7 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1 col-lg-12 col-md-6 col-sm-3">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,41 +61,43 @@
   </div>
   <main>
     <form action="#" method="get" class="row mt-4 needs-validation" novalidate>
-    <div class="container">
-      <br>
-      <h1 style="text-align: center;">Carrito de compras</h1><br>
-      <h3>Artículos a comprar</h3>
-      <table style="width: 900px; border-collapse: 3px;">
-        <tr style="border-bottom:1px solid">
-        <th style="padding: 25px;"></th>
-        <th style="padding: 25px;">Nombre</th>
-        <th style="padding: 25px;">Costo</th>
-        <th style="padding: 25px;">Cantidad</th>
-        <th style="padding: 25px;">Subtotal</th>
-      </tr> 
-        <tbody id="cart">
+      <div class="container">
+        <br>
+        <h1 style="text-align: center;">Carrito de compras</h1><br>
+        <h3>Artículos a comprar</h3>
+        <div class="table-responsive">
+          <table style="border-collapse: 3px;" class="table table-bordered">
+            <tr style="border-bottom:1px solid">
+              <th style="padding: 25px;"></th>
+              <th style="padding: 25px;">Nombre</th>
+              <th style="padding: 25px;">Costo</th>
+              <th style="padding: 25px;">Cantidad</th>
+              <th style="padding: 25px;">Subtotal</th>
+            </tr> 
+            <tbody id="cart">
 
-        </tbody>
-      </table>
-    </div>
+            </tbody>
+          </table>
+        </div>
+      </div>
     
-    <hr>
+      <hr>
     
-    <div class="container">
-        <h3>Tipo de envío</h3>
-        <input name="envio" type="radio" id="premium" onchange="TiposDeEnvios()" required> 
-        <label for="premium">Premium: 2 a 5 días (15%)</label>  <br>
-        <input name="envio" type="radio" id="express" onchange="TiposDeEnvios()" required> 
-        <label for="express">Express: 5 a 8 días (7%)</label> <br>
-        <input name="envio" type="radio" id="standard" onchange="TiposDeEnvios()" required> 
-        <label for="standard">Standard: 12 a 15 días (5%)</label> 
-        <input type="text" id="metodoEnvioSeleccionado" style='visibility: hidden;' required> <!-- Modo alterno para poner requerido el tipo de envío y que aparezca el cartel si no hay un tipo seleccionado-->
-          <div class="invalid-feedback">
-            Debe seleccionar un método de pago
-          </div>
-        <br><br>
+      <div class="container">
+          <h3>Tipo de envío</h3>
+          <input name="envio" type="radio" id="premium" onchange="TiposDeEnvios()" required> 
+          <label for="premium">Premium: 2 a 5 días (15%)</label>  <br>
+          <input name="envio" type="radio" id="express" onchange="TiposDeEnvios()" required> 
+          <label for="express">Express: 5 a 8 días (7%)</label> <br>
+          <input name="envio" type="radio" id="standard" onchange="TiposDeEnvios()" required> 
+          <label for="standard">Standard: 12 a 15 días (5%)</label> 
+          <input type="text" id="metodoEnvioSeleccionado" style='visibility: hidden;' required> <!-- Modo alterno para poner requerido el tipo de envío y que aparezca el cartel si no hay un tipo seleccionado-->
+            <div class="invalid-feedback">
+              Debe seleccionar un tipo de envío
+            </div>
+          <br><br>
 
-    </div>
+      </div>
 
       <div class="container form-group">
         <h3>Dirección de envío</h3>
@@ -128,7 +130,7 @@
         </div> <br>
       </div>
 
-    <hr class="mb-4">
+      <hr class="mb-4">
 
       <div class="container">
         <h3 class="mb-3">Costos</h3> <br>
@@ -220,20 +222,15 @@
         </div>
       </div>
         
-      </div>
-
-      <br>
-
-      <div class="container">
-        <button type="submit" class="btn btn-primary" style="width: 900px;" >Finalizar compra</button>
-      </div>
-
+        <button type="submit" class="btn btn-primary col-lg-12 col-md-6 col-sm-3">Finalizar compra</button>
+      
       <div class="alert alert-success alert-dismissible fade" role="alert" id="alert-success">
         <p style="text-align: center;">¡Has comprado con éxito!</p>
       </div>
     </form>
-  </main>
+  </main> 
 </div>
+      <br>
 
   <footer class="text-muted">
     <div class="container">
