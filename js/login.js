@@ -39,9 +39,6 @@ async function loginConGoogle(){
     sessionStorage.setItem("correo", credenciales.user.email);
     location.href="index.html";
 }
-    
-    // const loginConGoogle = document.querySelector("#login");
-    // console.log(loginConGoogle);
 
 document.addEventListener("DOMContentLoaded", ()=>{
     document.getElementById("ingresar").addEventListener("click",()=> {
@@ -51,5 +48,4 @@ document.addEventListener("DOMContentLoaded", ()=>{
     document.getElementById("loginGoogle").addEventListener("click", ()=>{
         loginConGoogle();
     });
-
 });
