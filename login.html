@@ -21,14 +21,16 @@
 <body>
   <main class="mt-5">
     <!-- <form> -->
-    <div class="container">
+    <div class="container" id="login">
       <div class="text-center">
         <h3> <b>Iniciar sesión</b></h3> <br> <br>
         <label for="email"> <strong>Correo Electrónico</strong> <input type="email" id="correo" name="email" class="form-control" placeholder="Ingresar dirección email"></label> <br> <br>
         <label for="contraseña"> <strong>Contraseña</strong>  <input type="password" id="contraseña" name="contraseña" class="form-control" placeholder="Ingresar contraseña"></label> <br> <br>
 
-        <button id="ingresar" class="btn btn-success">Ingresar</button>
+        <button id="ingresar" class="btn btn-success">Ingresar</button> <br><br>
+        <button id="loginGoogle" type="button" class="btn btn-info">Google</button>
       </div>
+      
     </div>
     <!-- </form> -->
   </main>
@@ -42,7 +44,7 @@
       <p><b>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</b></p>
     </div>
   </footer>
-  <script src="js/login.js"></script>
+  <script src="js/login.js" type="module"></script>
   <!-- <script src = "https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -- Para la swal normal (sin .fire) -->
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> <!-- Para swal con .fire -->
 </body>
