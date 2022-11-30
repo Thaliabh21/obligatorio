@@ -14,12 +14,41 @@ let arrayProducts = [];
 
 function mostrarImagenes(array){
 
+// DESAFÍO CAROUSEL
     let empty = ""; 
 
-    let photo = array.images;
-    for (let picture of photo){
-        empty += ` <img src="` + picture + `" alt="product image" class="img-thumbnail" width=275px> </img> `        
-    }
+    // let photo = array.images;  // -- Modo anterior sin carousel -- 
+    // for (let picture of photo){
+    //     empty += ` <img src="` + picture + `" alt="product image" class="img-thumbnail" width=275px> </img> `        
+    // }
+    empty += 
+    `<div class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src=`+ array.images[0] +` class="d-block w-100"></img>
+            </div>
+            <div class="carousel-item">
+                <img src=`+ array.images[1] +` class="d-block w-100"></img>
+            </div>
+            <div class="carousel-item">
+                <img src=`+ array.images[2] +` class="d-block w-100"></img>
+            </div>
+            <div class="carousel-item">
+                <img src=`+ array.images[3] +` class="d-block w-100"></img>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>`
+// -- Usé el carousel de Bootstrap crossfade, con ninguno de los que probé, pude hacer funcionar los botones (incluso probé en HTML), de a ratos se buggea y no cambia las imágenes (por ejemplo, al recargar la página) --
+// -- El funcionamiento de la barra de navegación no es correcto, no se oculta ni despliega el dropdown --
+
     return empty;
 }
 
@@ -40,7 +69,6 @@ function verProducto(array){
     </div>`
 
     document.getElementById("info").innerHTML= inicio;
-
 }
 
 let arrayComents = [];
