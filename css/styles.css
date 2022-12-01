@@ -199,6 +199,11 @@ a.custom-card:hover {
   color: #fff;
 }
 
+.swal2-styled.swal2-confirm.swalBtnColor3 {
+  background-color: #c8ff00;
+  color: #fff;
+}
+
 /* .swal2-styled.swal2-confirm {
   background: initial;
   background-color: #db1515;

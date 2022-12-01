@@ -85,7 +85,7 @@ function verEnCatalogo(catalogoArticulos){ // -- Le paso el parámetro para que 
            ((maxCost == undefined) || (maxCost != undefined && parseInt(articulo.cost) <= maxCost))){
 
     listaAMostrar += `
-            <div onclick="setProductID(${articulo.id})" class="list-group-item list-group-item-action">
+            <div role="button" onclick="setProductID(${articulo.id})" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
                         <img src="` + articulo.image + `" alt="product image" class="img-thumbnail"> </img>

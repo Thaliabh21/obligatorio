@@ -218,11 +218,21 @@ function eliminarArticulo(event){
                 articulos.splice(i,1);
             }
         }
-    localStorage.setItem("productosCarrito", JSON.stringify(articulos));
-    mostrarCarrito(articulos);
-    sumaSubtotal();
-    TiposDeEnvios();
-}
+        
+        localStorage.setItem("productosCarrito", JSON.stringify(articulos));
+        mostrarCarrito(articulos);
+        sumaSubtotal();
+        TiposDeEnvios();
+        
+        swal.fire({
+            customClass: {
+                confirmButton: 'swalBtnColor3'},
+            title: "",
+            text: "Se ha eliminado el producto del carrito",
+            icon: "success",
+            timer: "3000",
+        });
+    }
 
 
 document.addEventListener("DOMContentLoaded", function(e){

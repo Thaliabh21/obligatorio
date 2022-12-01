@@ -22,7 +22,7 @@ function mostrarImagenes(array){
     //     empty += ` <img src="` + picture + `" alt="product image" class="img-thumbnail" width=275px> </img> `        
     // }
     empty += 
-    `<div class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2000">
+    `<div class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="2000" id="carouselExampleControls">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src=`+ array.images[0] +` class="d-block w-100"></img>
@@ -46,7 +46,7 @@ function mostrarImagenes(array){
         <span class="visually-hidden">Next</span>
       </button>
     </div>`
-// -- Usé el carousel de Bootstrap crossfade, con ninguno de los que probé, pude hacer funcionar los botones (incluso probé en HTML), de a ratos se buggea y no cambia las imágenes (por ejemplo, al recargar la página) --
+// -- Usé el carousel de Bootstrap crossfade, de a ratos se buggea y no cambia las imágenes (por ejemplo, al recargar la página) --
 // -- El funcionamiento de la barra de navegación no es correcto, no se oculta ni despliega el dropdown --
 
     return empty;
@@ -106,7 +106,7 @@ function setProductID(id) {
 function mostrarProductosRelacionados(producto){
     let relacionado = "";
     for (let objeto of producto.relatedProducts){
-        relacionado += `<div onclick="setProductID(`+ objeto.id +`)"> 
+        relacionado += `<div role="button" onclick="setProductID(`+ objeto.id +`)"> 
         <img src="` + objeto.image + `"alt="product image" class="img-thumbnail" width="250px"> </img> 
         <br><br>
         <p><strong>`+ objeto.name +`</strong></p>
