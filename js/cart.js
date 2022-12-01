@@ -11,47 +11,73 @@ let user = sessionStorage.getItem("correo");
 let articulos=[];
  
 
-function cambiarCantidad(){
-    let cant = document.getElementById("cantidad");
-        articulo.count = cant.value; // Le asigno a la propiedad articulo.count, el valor introducido en el input.
+function cambiarCantidad(event){
+    let productID = event.srcElement.id;
+    let cant = document.getElementById(productID);
+       // articulo.count = cant.value; // Le asigno a la propiedad articulo.count, el valor introducido en el input.
+        for (articulo of articulos){
+            let articuloID = `cantidad_${articulo.id}`
+            if (productID == articuloID){
+                articulo.count = cant.value;
+            }
+        }
         mostrarCarrito(articulos);
+        sumaSubtotal();
         TiposDeEnvios();
-
+    
         // if (cant.value == ""){
         //     cant.style.borderColor = 'red';
         // } -- QUIERO HACER QUE SI EL INPUT ESTÁ VACÍO QUEDE EN ROJO, EN TEORÍA NO DEBE DEJAR COMPRAR SI ESTÁ VACÍO --
 }
 
-let subtotal=0;
 
 function mostrarCarrito(articulos){
     let cart="";
     for (articulo of articulos){
-       subtotal = articulo.count * articulo.unitCost;
+        articulo.subtotal = articulo.count * articulo.unitCost;
             cart+=`<tr>
             <td><img src="` + articulo.image + `"alt="product image" class="img-thumbnail" width="125px"></img></td>
             <td style="padding: 25px;">` + articulo.name + `</td>
             <td style="padding: 25px;">` + articulo.currency + " " + articulo.unitCost + `</td>
-            <td style="padding: 25px;">` + `<input onchange="cambiarCantidad()" oninput="validity.valid||(value='1');" id="cantidad" type="number" min="1" value=` + articulo.count + ` style="width:70px;"></input>` + `</td>
-            <td style="padding: 25px;"><strong>` + articulo.currency + " " + subtotal + `</strong></td>
+            <td style="padding: 25px;">` + `<input onchange="cambiarCantidad(event)" oninput="validity.valid||(value='1');" 
+                id="cantidad_${articulo.id}" type="number" min="1" value=` + articulo.count + ` style="width:70px;"></input>` + `</td>
+            <td style="padding: 25px;"><strong>` + articulo.currency + " " + articulo.subtotal + `</strong></td>
+            <td style="padding: 25px; text-align: center; color: red" onclick="eliminarArticulo(event)" role="button" 
+                id="borrar_${articulo.id}">
+                <i class="fas fa-trash-alt"></i> </td>
             </tr>`
     }
-    document.getElementById("subtotal").innerHTML= "USD " + subtotal;
+    //document.getElementById("subtotal").innerHTML= "USD " + subtotalTotal;
     document.getElementById("cart").innerHTML= cart;
 }
 
 // -- oninput="validity.valid||(value='1');" CON ESTO NO PERMITO QUE SE INGRESEN NÚMEROS NEGATIVOS EN EL INPUT AL ESCRIBIR,
 //    SI SE PRESIONA EL "-", DIRECTAMENTE PONE EL 1, LO MISMO AL PRESIONAR 0, AMBOS CASOS CON EL INPUT VACÍO --
 
+let subtotalTotal = 0;
+function sumaSubtotal(){
+    let resultadoSubtotal = 0;
+    for (articulo of articulos){
+        if(articulo.currency == "UYU"){
+            resultadoSubtotal += Math.round((articulo.subtotal/40)*100)/100; // -- Convierte en la tabla de "costos" a dólares el precio en pesos --
+        } else {
+            resultadoSubtotal += articulo.subtotal;
+        }
+    }
+    subtotalTotal = resultadoSubtotal;
+    localStorage.setItem("productosCarrito", JSON.stringify(articulos));
+    document.getElementById("subtotal").innerHTML= "USD " + subtotalTotal;
+}
+
 let porcentajeEnvio = 0;
 
 function calcularPorcentaje(porcentaje){
-   porcentajeEnvio= ((subtotal*porcentaje)/100);
+    porcentajeEnvio= Math.round((subtotalTotal*(porcentaje/100)));
 }
 
 function mostrarCostos(porcentaje, etiquetaEnvio, etiquetaTotal){
     calcularPorcentaje(porcentaje);
-    totalConEnvio = subtotal+ porcentajeEnvio;
+    totalConEnvio = subtotalTotal+porcentajeEnvio;
 
         document.getElementById(etiquetaEnvio).innerHTML = "USD " + porcentajeEnvio;
         document.getElementById(etiquetaTotal).innerHTML = "USD " + totalConEnvio;
@@ -124,7 +150,7 @@ function cambiarMetodoDePago(){
 }
 
 /*Inutilizable, por validaciones de Bootstrap*/
-function comprar(){/*
+/*function comprar(){
 
 // CAMPO CALLE VACIO
     if (document.getElementById("calle").value === ""){
@@ -167,20 +193,48 @@ function comprar(){/*
           document.getElementById("transferencia").checked!== true)){
              showAlertSuccess();
              location.reload();
-    }*/
-}
+    }
+}*/
 
 function showAlertSuccess() {
     document.getElementById("alert-success").classList.add("show");
 }
 
-document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(CART_INFO_URL + "25801.json").then(function(resultObj){
-        if(resultObj.status === "ok"){
-            articulos=resultObj.data.articles;
-            mostrarCarrito(articulos);
+// DESAFÍO DE AGREGAR PRODUCTOS AL CARRITO
+function agregarAlCarrito(){
+    let productosCarritoLocal = JSON.parse(localStorage.getItem("productosCarrito"));
+
+    if (productosCarritoLocal){
+        articulos = productosCarritoLocal;
+    }
+}
+
+// DESAFÍO DE ELIMINAR ARTICULOS DEL CARRITO
+function eliminarArticulo(event){
+    let borrarID = event.srcElement.id;
+        for (let i=0; i<articulos.length; i++){
+            let articuloID = `borrar_${articulos[i].id}`
+            if (borrarID == articuloID){
+                articulos.splice(i,1);
+            }
         }
-    })
+    localStorage.setItem("productosCarrito", JSON.stringify(articulos));
+    mostrarCarrito(articulos);
+    sumaSubtotal();
+    TiposDeEnvios();
+}
+
+
+document.addEventListener("DOMContentLoaded", function(e){
+    // getJSONData(CART_INFO_URL + "25801.json").then(function(resultObj){
+    //     if(resultObj.status === "ok"){
+    //         articulos=resultObj.data.articles;
+    //         mostrarCarrito(articulos);
+    //     }
+    // })
+        agregarAlCarrito();
+        mostrarCarrito(articulos);
+        sumaSubtotal();
 
         document.getElementById("cerrar").addEventListener("click", function() {
         sessionStorage.removeItem("email"); // Elimino el usuario guardado anteriormente en el almacenamiento de sesión.

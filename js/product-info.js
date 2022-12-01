@@ -55,7 +55,7 @@ function mostrarImagenes(array){
 function verProducto(array){
     let inicio = "";
     inicio += `<div> 
-        <h2> <br> ` + array.name + ` </h2> <br> <hr>        
+        <h2> <br> ` + array.name + ` <button type="button" id="comprar" class="btn btn-success">Comprar</button> </h2>  <br> <hr>        
         <h4> <strong> Precio: </strong> </h4>
         <p> ` + array.currency + " " + array.cost + ` </p>
         <h4> <strong> Descripción: </strong> </h4>
@@ -115,6 +115,28 @@ function mostrarProductosRelacionados(producto){
     document.getElementById("relatedProducts").innerHTML= relacionado;
 }
 
+
+// DESAFÍO DE AGREGAR PRODUCTOS AL CARRITO
+function comprarArticulo(articulo){
+    let productosCarritoLocal = JSON.parse(localStorage.getItem("productosCarrito"));
+    let productosCarrito = [];
+
+    if (productosCarritoLocal){
+        productosCarrito = productosCarritoLocal;
+    }
+
+    productosCarrito.push({
+        "id": articulo.id,
+        "image": articulo.images[0],
+        "name": articulo.name,
+        "currency": articulo.currency,
+        "unitCost": articulo.cost,
+        "count": 1
+    });
+
+    localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
+}
+
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(PRODUCT_INFO_URL+productID+".json").then(function(resultObj){
         if (resultObj.status === "ok")
@@ -122,6 +144,10 @@ document.addEventListener("DOMContentLoaded", function(e){
             arrayProducts = resultObj.data
             verProducto(arrayProducts);
             mostrarProductosRelacionados(arrayProducts);
+            
+            document.getElementById("comprar").addEventListener("click", ()=>{ // -- Parte del desafío --
+                comprarArticulo(arrayProducts);
+            });
         }
     });
 
@@ -132,6 +158,8 @@ document.addEventListener("DOMContentLoaded", function(e){
             verComentarios(arrayComents);
         }
     });
+
+    
 
     // DESAFÍO AGREGAR COMENTARIOS
     document.getElementById("enviar").addEventListener("click", function(){
