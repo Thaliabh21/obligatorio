@@ -47,7 +47,6 @@ function mostrarImagenes(array){
       </button>
     </div>`
 // -- Usé el carousel de Bootstrap crossfade, de a ratos se buggea y no cambia las imágenes (por ejemplo, al recargar la página) --
-// -- El funcionamiento de la barra de navegación no es correcto, no se oculta ni despliega el dropdown --
 
     return empty;
 }
