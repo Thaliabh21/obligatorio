@@ -135,6 +135,14 @@ function comprarArticulo(articulo){
     });
 
     localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
+    swal.fire({
+        customClass: {
+            confirmButton: 'swalBtnColor2'},
+        title: "",
+        text: "Se ha agregado el producto al carrito de manera exitosa",
+        icon: "success",
+        timer: "3000",
+    });
 }
 
 document.addEventListener("DOMContentLoaded", function(e){
